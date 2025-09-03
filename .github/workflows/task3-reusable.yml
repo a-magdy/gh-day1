@@ -1,0 +1,14 @@
+name: Reusable workflow
+
+on:
+  workflow_call:
+
+jobs:
+  reusable-job:
+    runs-on: ubuntu-latest
+    outputs:
+      job_output: "${{ steps.step_with_output.outputs.some_output }}"
+    steps:
+      - run: echo "Hello from job1"
+      - run: echo "some_output=some-value" >> "$GITHUB_OUTPUT"
+        id: step_with_output
