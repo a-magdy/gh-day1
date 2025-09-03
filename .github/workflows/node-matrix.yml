@@ -18,5 +18,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      # - run: npm install
-      # - run: npm test
+      - name: Install my own dependency
+        if: ${{ matrix.node-version == '16.x' }}
+        run: |
+          echo "run.."
+          echo "commands.."
