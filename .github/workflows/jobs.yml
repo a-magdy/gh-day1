@@ -9,6 +9,8 @@ on:
 jobs:
   job1:
     runs-on: ubuntu-latest
+    outputs:
+      value: some-value
     steps:
       - run: echo "Hello from job1"
   job2:
@@ -16,3 +18,4 @@ jobs:
     needs: [job1]
     steps:
       - run: echo "Hello from job2"
+      - run: "${{ toJson(needs) }}"
