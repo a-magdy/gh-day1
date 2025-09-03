@@ -5,18 +5,34 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
-    runs-on: ${{ matrix.os }}
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      data: ${{ steps.step_id.outputs.data}}
+    steps:
+      - run: echo "downloading data"
+      - run: echo "data=something" >> "$GITHUB_OUTPUT"
+        id: step_id
 
+  test:
+    runs-on: ${{ matrix.os }}
+    needs: setup
     strategy:
       matrix:
         node-version: [16.x, 18.x, 20.x]
         os: [ubuntu-latest, macos-latest]
     steps:
+      - uses: actions/checkout@v5
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
+
+      - run: |
+          echo "initializing..."
+          echo "${{ needs.setup.outputs.data}}" >> myfile.txt
+          ls -lsa
 
       - run: echo "Running on ${{ matrix.os }} with Node.js ${{ matrix.node-version }}"
 
@@ -29,3 +45,15 @@ jobs:
             echo "run.."
             echo "commands.."
           fi
+
+  build:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - run: echo "Building..."
+
+  package:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - run: echo "Packaging..."
