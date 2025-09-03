@@ -18,4 +18,4 @@ jobs:
     needs: [job1]
     steps:
       - run: echo "Hello from job2"
-      - run: "${{ toJson(needs) }}"
+      - run: echo "${{ toJson(needs) }}"
