@@ -1,7 +1,7 @@
 name: Build
 
 on:
-  push:
+  # push:
   workflow_dispatch:
     inputs:
       name:
@@ -14,5 +14,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - run: echo "Hello, ${{ inputs.name }} !"
-      # - uses: ./test
+
+      - uses: ./test
+        with:
+          name: ${{ inputs.name }}

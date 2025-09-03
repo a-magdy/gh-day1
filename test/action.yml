@@ -1,8 +1,13 @@
 name: My Action
 description: A simple GitHub Action that prints "Hello, world!"
 
+inputs:
+  name:
+    description: "Who to greet"
+    default: "World"
+
 runs:
   using: "composite"
   steps:
-    - run: echo "Hello, world!"
+    - run: echo "Hello, ${{ inputs.name }}!"
       shell: bash
