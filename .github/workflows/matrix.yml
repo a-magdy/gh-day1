@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        env: [test, dev]
+        os: [ubuntu-latest, windows-latest]
     steps:
       - run: echo "${{ toJson(matrix) }}"
-      - run: echo "${{ matrix.env }}"
+      - run: echo "${{ matrix.os }}"
