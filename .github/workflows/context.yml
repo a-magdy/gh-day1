@@ -7,6 +7,4 @@ jobs:
   context:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Hello"
-      - run: |
-          echo "${{ toJSON(github) }}"
+      - run: echo "${{ toJson(github) }}"
