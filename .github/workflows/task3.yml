@@ -1,15 +1,24 @@
 name: Task 3
 
-on: push
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Name for the job'
+        required: true
+        default: 'World'
 
 jobs:
   job1:
     uses: ./.github/workflows/task3-reusable.yml
+    with:
+      name: ${{ inputs.name }}
 
   job2:
     runs-on: ubuntu-latest
     needs: [job1]
     steps:
-      - run: echo "Hello from job2"
+      - run: |
+          echo "Hello from job2, input name is: ${{ inputs.name }}"
       - run: echo "${{ toJson(needs) }}"
       - run: echo "${{ needs.job1.outputs.job_output }}"

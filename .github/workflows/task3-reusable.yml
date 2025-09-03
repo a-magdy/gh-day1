@@ -2,6 +2,16 @@ name: Reusable workflow
 
 on:
   workflow_call:
+    inputs:
+      name:
+        description: 'Name for the job'
+        required: true
+        type: string
+        default: 'World'
+    outputs:
+      job_output:
+        description: 'Output from the reusable job'
+        value: ${{ jobs.reusable-job.outputs.job_output }}
 
 jobs:
   reusable-job:
@@ -9,6 +19,6 @@ jobs:
     outputs:
       job_output: "${{ steps.step_with_output.outputs.some_output }}"
     steps:
-      - run: echo "Hello from job1"
+      - run: echo "Hello from job1, with input name ${{ inputs.name }}"
       - run: echo "some_output=some-value" >> "$GITHUB_OUTPUT"
         id: step_with_output
