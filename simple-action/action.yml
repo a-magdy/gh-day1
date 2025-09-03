@@ -22,4 +22,4 @@ runs:
 
     - id: greeting-step
       shell: bash
-      run: echo "greeting=${{ inputs.name }}" >> "$GITHUB_OUTPUT"
+      run: echo "greeting=hello_${{ inputs.name }}" >> "$GITHUB_OUTPUT"
