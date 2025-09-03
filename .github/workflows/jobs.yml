@@ -10,7 +10,7 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     outputs:
-      value: some-value
+      some_output: some-value
     steps:
       - run: echo "Hello from job1"
   job2:
@@ -19,3 +19,4 @@ jobs:
     steps:
       - run: echo "Hello from job2"
       - run: echo "${{ toJson(needs) }}"
+      - run: echo "${{ needs.job1.outputs.some_output }}"
