@@ -2,9 +2,16 @@ name: Context
 
 on:
   workflow_dispatch:
+    inputs:
+      example_input:
+        description: 'An example input'
+        required: true
+        default: 'Hello'
 
 jobs:
   context:
     runs-on: ubuntu-latest
     steps:
       - run: echo "${{ toJson(github) }}"
+      - run: echo "${{ toJson(inputs) }}"
+      - run: echo "${{ toJson(runner) }}"
