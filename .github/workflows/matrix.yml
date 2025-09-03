@@ -6,7 +6,11 @@ on:
       - main
 
 jobs:
-  matrix:
+  test-parallel:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        env: [test, dev]
     steps:
-      - run: echo "Hello, World!"
+      - run: echo "${{ toJson(matrix) }}"
+      - run: echo "${{ matrix.env }}"
