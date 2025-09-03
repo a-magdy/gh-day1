@@ -8,9 +8,18 @@ inputs:
     required: true
     default: 'World'
 
+outputs:
+  greeting:
+    description: 'Greeting message'
+    value: ${{ steps.greeting-step.outputs.greeting }}
+
 runs:
   using: 'composite'
   steps:
     - run: |
         echo "Hello, ${{ inputs.name }}!"
       shell: bash
+
+    - id: greeting-step
+      shell: bash
+      run: echo "greeting=${{ inputs.name }}" >> "$GITHUB_OUTPUT"
