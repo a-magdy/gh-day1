@@ -14,6 +14,12 @@ jobs:
       - run: echo "data=something" >> "$GITHUB_OUTPUT"
         id: step_id
 
+  another-job:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - run: echo "Running another job"
+
   test:
     runs-on: ${{ matrix.os }}
     needs: setup
@@ -48,7 +54,7 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    needs: test
+    needs: [test, another-job]
     steps:
       - run: echo "Building..."
       - uses: actions/upload-artifact@v3
