@@ -20,6 +20,10 @@ jobs:
 
       - name: Install my own dependency
         if: ${{ matrix.node-version == '16.x' }}
+        env:
+          MY_VER: "${{ matrix.node-version }}"
         run: |
-          echo "run.."
-          echo "commands.."
+          if [ "${MY_VER}" == "16.x" ]; then
+            echo "run.."
+            echo "commands.."
+          fi
