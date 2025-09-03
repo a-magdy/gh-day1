@@ -19,6 +19,11 @@ jobs:
     outputs:
       job_output: "${{ steps.step_with_output.outputs.some_output }}"
     steps:
-      - run: echo "Hello from job1, with input name ${{ inputs.name }}"
+      # - run: echo "Hello from job1, with input name ${{ inputs.name }}"
+      
+      - uses: ./simple-action
+        with:
+          name: ${{ inputs.name }}
+
       - run: echo "some_output=some-value" >> "$GITHUB_OUTPUT"
         id: step_with_output
