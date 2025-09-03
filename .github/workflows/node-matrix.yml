@@ -6,15 +6,16 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
         node-version: [16.x, 18.x, 20.x]
-
+        os: [ubuntu-latest, macos-latest]
     steps:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
+
         with:
           node-version: ${{ matrix.node-version }}
 
