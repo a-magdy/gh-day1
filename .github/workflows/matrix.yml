@@ -1,0 +1,12 @@
+name: Matrix
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  matrix:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hello, World!"
