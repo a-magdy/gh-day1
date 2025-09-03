@@ -7,3 +7,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "building..."
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "testing..."
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "packaging..."
