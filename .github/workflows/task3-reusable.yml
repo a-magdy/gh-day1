@@ -21,6 +21,7 @@ jobs:
     steps:
       # - run: echo "Hello from job1, with input name ${{ inputs.name }}"
       
+      - uses: actions/checkout@v5
       - uses: ./simple-action
         with:
           name: ${{ inputs.name }}
