@@ -3,6 +3,10 @@ name: Build
 on:
   push:
   workflow_dispatch:
+    inputs:
+      name:
+        description: "Who to greet"
+        default: "World"
 
 jobs:
   build:
@@ -10,5 +14,5 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      # - run: echo "Hello, world!"
-      - uses: ./test
+      - run: echo "Hello, ${{ inputs.name }} !"
+      # - uses: ./test
